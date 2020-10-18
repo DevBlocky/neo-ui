@@ -1,8 +1,8 @@
 --[[
-    This file serves as a hub for namespacing the other files
-    It also serves as a place to get that global namespace (export and events)
+    This file serves as the hub for getting the global object
+    to create the menus. It basically just returns the stateman.
 ]] --
-Neo = {Bindings = Bindings, SM = SM, Events = Events}
+Neo = SM
 
 -- events for getting the global namespace
 AddEventHandler('neo:get', function() TriggerEvent('neo:set', Neo) end)
