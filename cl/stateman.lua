@@ -11,10 +11,12 @@ local function getValueIndex(table, value)
     return nil
 end
 local function removeAllInstances(tb, value)
-    for i = 1, #tb do
+    local i = 1
+    while i <= tb do
         if tb[i] == value then
             table.remove(tb, i)
-            i = i - 1
+        else
+            i = i + 1
         end
     end
 end

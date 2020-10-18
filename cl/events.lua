@@ -14,11 +14,15 @@ end
 -- removes all event handlers with the same name and handler
 function Events.removeHandler(events, name, handler)
     name = string.lower(name)
-    for i = 1, #events do
+
+    -- remove all matching items from the list
+    local i = 1
+    while i <= #events do
         local h = events[i]
         if h.name == name and h.handler == handler then
             table.remove(events, i)
-            i = i - 1
+        else
+            i = i + 1
         end
     end
 end
