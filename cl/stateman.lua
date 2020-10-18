@@ -160,7 +160,13 @@ end
 function SM.destroyMenu(sm, menu)
     sm = assertState(sm)
     assertMenu(sm, menu)
+    
+    -- go back if this is the current menu
+    if SM.getOpenMenu(sm) == menu then
+        SM.openPreviousMenu(sm)
+    end
 
+    -- destroy the menu
     removeAllInstances(sm.menus, menu)
     sm.menuButtons[menu] = nil
     Bindings.destroyMenu(menu)
