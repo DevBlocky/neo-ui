@@ -200,6 +200,17 @@ function SM.buttonExists(sm, button)
     return getValueIndex(sm.buttons, button) ~= nil
 end
 
+--[[ EVENTS ]]
+
+function SM.on(sm, name, handler)
+    sm = assertState(sm)
+    Events.addHandler(sm.events, name, handler)
+end
+function SM.removeListener(sm, name, handler)
+    sm = assertState(sm)
+    Events.removeHandler(sm.events, name, handler)
+end
+
 -- operations on the history:
 -- push: adds a new value to the end of the history
 -- pop: removes the last value of the history
