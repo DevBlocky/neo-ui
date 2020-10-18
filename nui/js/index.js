@@ -13,6 +13,7 @@ async function postClient(payload, route = 'message') {
 }
 
 // sanitizes text for html then puts it inside a template
+// eslint-disable-next-line no-unused-vars
 function safeTextWithTemplate(texts, template) {
     if (!(texts instanceof Array)) texts = [texts];
 
