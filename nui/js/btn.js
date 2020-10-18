@@ -79,14 +79,12 @@ Vue.component('neo-btn', {
     },
     watch: {
         listIndex(index) {
-            const { length } = this.button.list;
-
             // send a client ev
             postClient({
                 type: 'list_move',
                 button: this.button.id,
                 menu: this.menu.id,
-                index: this.listIndex,
+                index
             });
         },
         checked(checked) {

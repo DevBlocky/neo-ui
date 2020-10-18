@@ -1,2 +1,4 @@
 .vscode/
 test*.lua
+
+node_modules/

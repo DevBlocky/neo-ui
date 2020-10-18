@@ -71,7 +71,7 @@ const winMsgMixin = {
 
 (() => {
     // this is for testing before lua bindings
-    let app = new Vue({
+    /*let app =*/ new Vue({
         mixins: [winMsgMixin],
         el: '#app',
         data: {

@@ -1,0 +1,19 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+    lua-lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: leafo/gh-actions-lua@v5
+            - uses: leafo/gh-actions-luarocks@v2
+            - run: luarocks install luacheck
+            - run: luacheck -d **/*.lua
+    js-lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+            - run: npm i
+            - run: npx eslint nui/js

@@ -64,7 +64,7 @@ Vue.component('neo-btn-group', {
         },
     },
     watch: {
-        index(index, oldIndex) {
+        index(index) {
             // this will move the top according to the index
             this.top = this.getTopFromIndex(index);
 

@@ -1,0 +1,17 @@
+{
+    "name": "neo-ui",
+    "author": "blockba5her",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/blockba5her/neo-ui.git"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/blockba5her/neo-ui/issues"
+    },
+    "homepage": "https://github.com/blockba5her/neo-ui#readme",
+    "devDependencies": {
+        "eslint": "^7.11.0"
+    }
+}
