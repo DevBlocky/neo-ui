@@ -120,6 +120,9 @@ function SM.destroy(sm)
     for evName, fn in pairs(sm._gEv) do
         Events.removeHandler(Events.global, evName, fn)
     end
+
+    -- let garbage collector handle this
+    SM._s[sm.id] = nil
 end
 
 --[[ CREATION BINDINGS ]]
