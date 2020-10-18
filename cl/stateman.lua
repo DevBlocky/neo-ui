@@ -7,7 +7,6 @@ SM = {
     _s = {} -- stores the menu states internally
 }
 
-
 -- returns true if both the button and menu exist in the sm context
 local function checkSmContains(sm, menu, button)
     if menu and getValueIndex(sm.menus, menu) == nil then return false end
@@ -61,7 +60,7 @@ local smEventHandlers = {
     ['buttonCheck'] = function(sm, menu, button, checked)
         if not checkSmContains(sm, menu, button) then return end
         sm.cache.checks[button] = checked
-        Events.emit(sm.events, 'buttonCheck')
+        Events.emit(sm.events, 'buttonCheck', menu, button, checked)
     end,
     ['buttonListMove'] = function(sm, menu, button, index)
         if not checkSmContains(sm, menu, button) then return end
@@ -108,13 +107,9 @@ function SM.destroy(sm)
 
     -- destroy all menu objects
     -- do this before buttons for better performance
-    while #sm.menus > 0 do
-        SM.destroyMenu(sm, sm.menus[1])
-    end
+    while #sm.menus > 0 do SM.destroyMenu(sm, sm.menus[1]) end
     -- destroy all button objects
-    while #sm.buttons > 0 do
-        SM.destroyButton(sm, sm.buttons[1])
-    end
+    while #sm.buttons > 0 do SM.destroyButton(sm, sm.buttons[1]) end
 
     -- remove all regstered events
     for evName, fn in pairs(sm._gEv) do
@@ -163,11 +158,9 @@ end
 function SM.destroyMenu(sm, menu)
     sm = assertState(sm)
     assertMenu(sm, menu)
-    
+
     -- go back if this is the current menu
-    if SM.getOpenMenu(sm) == menu then
-        SM.openPreviousMenu(sm)
-    end
+    if SM.getOpenMenu(sm) == menu then SM.openPreviousMenu(sm) end
 
     -- destroy the menu
     removeAllInstances(sm.menus, menu)
