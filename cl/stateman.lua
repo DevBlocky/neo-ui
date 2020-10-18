@@ -273,6 +273,17 @@ end
 
 --[[ CACHE GETTERS ]]
 
+function SM.getMenus(sm)
+    return sm.menus
+end
+function SM.getAllButtons(sm)
+    return sm.buttons
+end
+function SM.getMenuButtons(sm, menu)
+    assertContains(sm.menus, menu, invMIDMsg)
+
+    return sm.menuButtons[menu] or {}
+end
 function SM.getMenuIndex(sm, menu)
     assertContains(sm.menus, menu, invMIDMsg)
 
