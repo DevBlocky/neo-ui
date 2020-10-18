@@ -11,7 +11,7 @@ function getValueIndex(tbl, value)
 end
 function removeAllInstances(tb, value)
     local i = 1
-    while i <= tb do
+    while i <= #tb do
         if tb[i] == value then
             table.remove(tb, i)
         else

@@ -24,7 +24,7 @@ end
 function Bindings.updateMenu(partial)
     SendNUIMessage({type = 'menu_update', payload = partial})
 end
-function Bindings.destroyButton(mid)
+function Bindings.destroyMenu(mid)
     SendNUIMessage({type = 'menu_destroy', payload = {id = mid}})
 end
 

@@ -103,6 +103,24 @@ function SM.init()
     SM._s[sm.id] = sm
     return sm.id
 end
+function SM.destroy(sm)
+    sm = assertState(sm)
+
+    -- destroy all menu objects
+    -- do this before buttons for better performance
+    while #sm.menus > 0 do
+        SM.destroyMenu(sm, sm.menus[1])
+    end
+    -- destroy all button objects
+    while #sm.buttons > 0 do
+        SM.destroyButton(sm, sm.buttons[1])
+    end
+
+    -- remove all regstered events
+    for evName, fn in pairs(sm._gEv) do
+        Events.removeHandler(Events.global, evName, fn)
+    end
+end
 
 --[[ CREATION BINDINGS ]]
 
