@@ -258,9 +258,10 @@ end
 -- closes current menu and opens the last menu in the history
 function SM.openPreviousMenu(sm)
     sm = assertState(sm)
-    if #sm.history > 1 then
-        SM.openMenu(sm, sm.history[#sm.history - 1], 'pop')
-    else
+    local lastMenu = sm.history[#sm.history - 1] -- get the last menu
+    if getValueIndex(sm.menus, lastMenu) ~= nil then -- make sure the menu exists
+        SM.openMenu(sm, lastMenu, 'pop')
+    else -- this menu does not exist, so just close out everything
         SM.closeCurrentMenu(sm, 'recreate')
     end
 end
