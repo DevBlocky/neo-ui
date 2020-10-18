@@ -134,7 +134,7 @@ end
 function SM.updateButton(sm, button, partial)
     assertContains(sm.buttons, button, invBIDMsg)
     partial.id = button
-    Bindings.updateMenu(partial)
+    Bindings.updateButton(partial)
 end
 
 --[[ DESTRUCTION BINDINGS ]]
