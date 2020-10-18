@@ -20,7 +20,7 @@ Vue.component('neo-menu', {
                 : null;
         },
         descHtml() {
-            if (!this.selectedButton.desc) return;
+            if (!this.selectedButton || !this.selectedButton.desc) return;
             const template = this.selectedButton.descTemplate || '{0}';
             return safeTextWithTemplate(this.selectedButton.desc, template);
         },
