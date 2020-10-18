@@ -9,7 +9,7 @@ jobs:
             - uses: leafo/gh-actions-lua@v5
             - uses: leafo/gh-actions-luarocks@v2
             - run: luarocks install luacheck
-            - run: luacheck -d **/*.lua
+            - run: luacheck -g --codes **/*.lua
     js-lint:
         runs-on: ubuntu-latest
         steps:
