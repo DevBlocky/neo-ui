@@ -105,7 +105,6 @@ const winMsgMixin = {
                 if (!obj) return;
 
                 arr.splice(arr.indexOf(obj));
-                console.log(this.menus, this.buttons);
             },
         },
         computed: {
