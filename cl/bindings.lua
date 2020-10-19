@@ -14,7 +14,7 @@ local nuiReady = false
 Citizen.CreateThread(function()
     Events.addHandler(Events.global, 'ready', function() nuiReady = true end)
 end)
-function Bindings.Wait() while not nuiReady do Citizen.Wait(1) end end
+function Bindings.wait() while not nuiReady do Citizen.Wait(1) end end
 
 -- menu related bindings
 function Bindings.createMenu(menu)

@@ -73,7 +73,7 @@ local smEventHandlers = {
 -- creates a new state manager object and registers the events
 function SM.init()
     -- wait for the UI to be ready
-    Bindings.Wait()
+    Bindings.wait()
 
     local sm = {
         id = createUid(),
@@ -128,13 +128,9 @@ function SM.destroy(sm)
     -- crashes the entire fucking client
     Citizen.CreateThread(function()
         -- destroy all menu objects
-        for i = 1, #sm.menus do
-            Bindings.destroyMenu(sm.menus[i])
-        end
+        for i = 1, #sm.menus do Bindings.destroyMenu(sm.menus[i]) end
         -- destroy all button objects
-        for i = 1, #sm.buttons do
-            Bindings.destroyButton(sm.buttons[i])
-        end
+        for i = 1, #sm.buttons do Bindings.destroyButton(sm.buttons[i]) end
     end)
 end
 
@@ -174,9 +170,7 @@ function SM.updateButton(sm, button, partial)
     assertButton(sm, button)
 
     -- cache certain button values
-    if partial.check ~= nil then
-        sm.cache.checks[button] = partial.check
-    end
+    if partial.check ~= nil then sm.cache.checks[button] = partial.check end
     if partial.listIndex ~= nil then
         -- sub 1 because lua->js
         partial.listIndex = partial.listIndex - 1

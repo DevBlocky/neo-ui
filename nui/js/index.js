@@ -101,7 +101,7 @@ const winMsgMixin = {
             },
             handleDestroy({ type, payload }) {
                 let arr = type === 'menu_destroy' ? this.menus : this.buttons;
-                let obj = arr.find(x => x.id == payload.id);
+                let obj = arr.find((x) => x.id == payload.id);
                 if (!obj) return;
 
                 arr.splice(arr.indexOf(obj));
