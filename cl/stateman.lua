@@ -94,7 +94,10 @@ function SM.init()
 
     -- register the global events declared in smEventHandlers
     for evName, fn in pairs(smEventHandlers) do
-        local handler = function(...) fn(sm, ...) end
+        local handler = function(...)
+            -- print(evName, ...)
+            fn(sm, ...)
+        end
         Events.addHandler(Events.global, evName, handler)
         sm._gEv[evName] = handler
     end
@@ -104,20 +107,35 @@ function SM.init()
 end
 function SM.destroy(sm)
     sm = assertState(sm)
-
-    -- destroy all menu objects
-    -- do this before buttons for better performance
-    while #sm.menus > 0 do SM.destroyMenu(sm, sm.menus[1]) end
-    -- destroy all button objects
-    while #sm.buttons > 0 do SM.destroyButton(sm, sm.buttons[1]) end
+    Citizen.Wait(0)
+    local state = GetResourceState(GetCurrentResourceName())
+    print(state)
 
     -- remove all regstered events
     for evName, fn in pairs(sm._gEv) do
         Events.removeHandler(Events.global, evName, fn)
     end
-
     -- let garbage collector handle this
     SM._s[sm.id] = nil
+
+    -- for the sake of god and everything that is holy
+    -- you *need* to keep this create thread here, or else
+    -- crashes will happen
+    --
+    -- *HELP NEEDED* if you can figure out the crash, then
+    -- please fix it! It has to do with closing the menus
+    -- while you are stopping the resource, and it somehow
+    -- crashes the entire fucking client
+    Citizen.CreateThread(function()
+        -- destroy all menu objects
+        for i = 1, #sm.menus do
+            Bindings.destroyMenu(sm.menus[i])
+        end
+        -- destroy all button objects
+        for i = 1, #sm.buttons do
+            Bindings.destroyButton(sm.buttons[i])
+        end
+    end)
 end
 
 --[[ CREATION BINDINGS ]]

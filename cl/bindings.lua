@@ -4,6 +4,11 @@
 ]] --
 Bindings = {}
 
+local function shouldSend()
+    local state = GetResourceState(GetCurrentResourceName())
+    return state == 'started' or state == 'starting'
+end
+
 -- used to wait for the NUI to be ready
 local nuiReady = false
 Citizen.CreateThread(function()
@@ -13,6 +18,7 @@ function Bindings.Wait() while not nuiReady do Citizen.Wait(1) end end
 
 -- menu related bindings
 function Bindings.createMenu(menu)
+    if not shouldSend() then return end
     local uid = createUid()
     menu.id = uid
     menu.buttons = {}
@@ -22,14 +28,17 @@ function Bindings.createMenu(menu)
     return uid
 end
 function Bindings.updateMenu(partial)
+    if not shouldSend() then return end
     SendNUIMessage({type = 'menu_update', payload = partial})
 end
 function Bindings.destroyMenu(mid)
+    if not shouldSend() then return end
     SendNUIMessage({type = 'menu_destroy', payload = {id = mid}})
 end
 
 -- button related bindings
 function Bindings.createButton(button)
+    if not shouldSend() then return end
     local uid = createUid()
     button.id = uid
 
@@ -37,15 +46,21 @@ function Bindings.createButton(button)
     return uid
 end
 function Bindings.updateButton(partial)
+    if not shouldSend() then return end
     SendNUIMessage({type = 'button_update', payload = partial})
 end
 function Bindings.destroyButton(bid)
+    if not shouldSend() then return end
     SendNUIMessage({type = 'button_destroy', payload = {id = bid}})
 end
 
 -- misc bindings
 function Bindings.sendAction(action)
+    if not shouldSend() then return end
     SendNUIMessage({type = 'action', action = action})
 end
 -- sends to the UI that the lua client is ready
-function Bindings.sendReady() SendNUIMessage({type = 'ready'}) end
+function Bindings.sendReady()
+    if not shouldSend() then return end
+    SendNUIMessage({type = 'ready'})
+end
