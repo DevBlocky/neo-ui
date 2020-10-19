@@ -142,12 +142,28 @@ end
 function SM.updateMenu(sm, menu, partial)
     sm = assertState(sm)
     assertMenu(sm, menu)
+
+    -- sub 1 from index because lua->js, plus cache value
+    if partial.index ~= nil then
+        partial.index = partial.index - 1
+        sm.cache.menuIndices[menu] = partial.index
+    end
     partial.id = menu
     Bindings.updateMenu(partial)
 end
 function SM.updateButton(sm, button, partial)
     sm = assertState(sm)
     assertButton(sm, button)
+
+    -- cache certain button values
+    if partial.check ~= nil then
+        sm.cache.checks[button] = partial.check
+    end
+    if partial.listIndex ~= nil then
+        -- sub 1 because lua->js
+        partial.listIndex = partial.listIndex - 1
+        sm.cache.listIndices[button] = partial.listIndex
+    end
     partial.id = button
     Bindings.updateButton(partial)
 end

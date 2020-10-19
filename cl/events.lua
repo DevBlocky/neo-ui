@@ -59,6 +59,5 @@ RegisterNUICallback('message', function(payload, cb)
         Events.emit(Events.global, 'buttonListMove', payload.menu,
                     payload.button, payload.index)
     end
-    -- print(json.encode(payload))
     cb('OK')
 end)
