@@ -30,8 +30,8 @@ If you are, to get started using our menu backend for your script, head over to 
 
 ## Contributing / Issues
 
-* `Issues` - Every and all issues with the UI backend are welcome to be submitted!
-* `Contributing` - All contributions through PRs are welcome! If you submit one, make sure it meets the code quality of the Github Actions.
+-   `Issues` - Every and all issues with the UI backend are welcome to be submitted!
+-   `Contributing` - All contributions through PRs are welcome! If you submit one, make sure it meets the code quality of the Github Actions.
 
 ## License
 
