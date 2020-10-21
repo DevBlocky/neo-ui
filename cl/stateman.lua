@@ -154,30 +154,49 @@ end
 
 --[[ UPDATE BINDINGS ]]
 
+-- applies a schema to the update partial, defined using 'schema'
+local function applyUpdateSchema(sm, partial, schema)
+    -- go through the schema and set the overrides
+    for k, v in pairs(schema) do
+        if v.override ~= nil then partial[k] = v.override end
+    end
+
+    -- go through the partial values and update according to the schema
+    for k, v in pairs(partial) do
+        local s = schema[k]
+        if s then
+            -- subtract one from the index because lua indices start at 1, while js start at 0
+            if s.index then v = v - 1 end
+            -- cache the value basedon the cache and cacheKey
+            if s.cache ~= nil then sm.cache[s.cache][s.cacheKey] = v end
+
+            -- re-set the value to make sure it's updated
+            partial[k] = v
+        end
+    end
+    return partial
+end
+-- two below functions do essentially the same thing, just one for menus and other for buttons:
+-- updates the partial based on the schema, then sends the payload to the NUI
 function SM.updateMenu(sm, menu, partial)
     sm = assertState(sm)
     assertMenu(sm, menu)
 
-    -- sub 1 from index because lua->js, plus cache value
-    if partial.index ~= nil then
-        partial.index = partial.index - 1
-        sm.cache.menuIndices[menu] = partial.index
-    end
-    partial.id = menu
+    partial = applyUpdateSchema(sm, partial, {
+        ['id'] = {override = menu},
+        ['index'] = {index = true, cache = "menuIndices", cacheKey = menu}
+    })
     Bindings.updateMenu(partial)
 end
 function SM.updateButton(sm, button, partial)
     sm = assertState(sm)
     assertButton(sm, button)
 
-    -- cache certain button values
-    if partial.check ~= nil then sm.cache.checks[button] = partial.check end
-    if partial.listIndex ~= nil then
-        -- sub 1 because lua->js
-        partial.listIndex = partial.listIndex - 1
-        sm.cache.listIndices[button] = partial.listIndex
-    end
-    partial.id = button
+    partial = applyUpdateSchema(sm, partial, {
+        ['id'] = {override = button},
+        ['check'] = {cache = 'checks', cacheKey = button},
+        ['listIndex'] = {index = true, cache = 'listIndices', cacheKey = button}
+    })
     Bindings.updateButton(partial)
 end
 
