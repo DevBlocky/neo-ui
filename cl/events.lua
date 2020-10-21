@@ -39,25 +39,36 @@ Events.global = Events.init()
 -- this is for when the NUI loads before the lua client
 Citizen.CreateThread(function() Bindings.sendReady() end)
 
--- listens for events from the NUI
+--[[ HANDLES EVENTS COMING FROM THE JS CLIENT ]]
+
+-- event schema
+-- [js_ev_name] = {name = client_name, params = params_to_pass_in_order}
+local events = {
+    ['ready'] = {name = "ready", params = {}},
+    ['open'] = {name = "menuOpen", params = {"menu"}},
+    ['close'] = {name = "menuClose", params = {"menu"}},
+    ['select'] = {name = "buttonSelect", params = {"menu", "button"}},
+    ['move'] = {name = "buttonHover", params = {"menu", "button", "index"}},
+    ['check_update'] = {
+        name = "buttonCheck",
+        params = {"menu", "button", "checked"}
+    },
+    ['list_move'] = {
+        name = "buttonListMove",
+        params = {"menu", "button", "index"}
+    }
+}
 RegisterNUICallback('message', function(payload, cb)
-    if payload.type == 'ready' then
-        Events.emit(Events.global, 'ready')
-    elseif payload.type == 'open' then
-        Events.emit(Events.global, 'menuOpen', payload.menu)
-    elseif payload.type == 'close' then
-        Events.emit(Events.global, 'menuClose', payload.menu)
-    elseif payload.type == 'select' then
-        Events.emit(Events.global, 'buttonSelect', payload.menu, payload.button)
-    elseif payload.type == 'move' then
-        Events.emit(Events.global, 'buttonHover', payload.menu, payload.button,
-                    payload.index)
-    elseif payload.type == 'check_update' then
-        Events.emit(Events.global, 'buttonCheck', payload.menu, payload.button,
-                    payload.checked)
-    elseif payload.type == 'list_move' then
-        Events.emit(Events.global, 'buttonListMove', payload.menu,
-                    payload.button, payload.index)
-    end
+    local schema = events[payload.type]
+    -- we're not setup to handle this event
+    if not schema then return cb('unk_ev') end
+
+    -- insert all params into the table in order of their name in the schema
+    local params = {}
+    for _, p in ipairs(schema.params) do table.insert(params, payload[p]) end
+    print(json.encode(params))
+
+    -- send out the event with the unpacked params
+    Events.emit(Events.global, schema.name, table.unpack(params))
     cb('OK')
 end)
