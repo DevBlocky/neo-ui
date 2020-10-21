@@ -66,7 +66,6 @@ RegisterNUICallback('message', function(payload, cb)
     -- insert all params into the table in order of their name in the schema
     local params = {}
     for _, p in ipairs(schema.params) do table.insert(params, payload[p]) end
-    print(json.encode(params))
 
     -- send out the event with the unpacked params
     Events.emit(Events.global, schema.name, table.unpack(params))
