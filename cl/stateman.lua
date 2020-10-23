@@ -73,9 +73,6 @@ local smEventHandlers = {
 
 -- creates a new state manager object and registers the events
 function SM.init()
-    -- wait for the UI to be ready
-    Bindings.wait()
-
     local sm = {
         id = createUid(),
 
@@ -119,20 +116,10 @@ function SM.destroy(sm)
     -- let garbage collector handle this
     SM._s[sm.id] = nil
 
-    -- for the sake of god and everything that is holy
-    -- you *need* to keep this create thread here, or else
-    -- crashes will happen
-    --
-    -- *HELP NEEDED* if you can figure out the crash, then
-    -- please fix it! It has to do with closing the menus
-    -- while you are stopping the resource, and it somehow
-    -- crashes the entire fucking client
-    Citizen.CreateThread(function()
-        -- destroy all menu objects
-        for i = 1, #sm.menus do Bindings.destroyMenu(sm.menus[i]) end
-        -- destroy all button objects
-        for i = 1, #sm.buttons do Bindings.destroyButton(sm.buttons[i]) end
-    end)
+    -- destroy all menu objects
+    for i = 1, #sm.menus do Bindings.destroyMenu(sm.menus[i]) end
+    -- destroy all button objects
+    for i = 1, #sm.buttons do Bindings.destroyButton(sm.buttons[i]) end
 end
 
 --[[ CREATION BINDINGS ]]
