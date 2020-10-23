@@ -54,21 +54,18 @@ local function shouldSend()
     local state = GetResourceState(GetCurrentResourceName())
     return state == 'started' or state == 'starting'
 end
-local function sendBulkMessages(messages)
-    -- TODO: add support for sending an array of messages instead
-    for _, m in ipairs(messages) do
-        SendNUIMessage(m)
-    end
-end
 Citizen.CreateThread(function()
     local nuiReady = false
     Events.addHandler(Events.global, 'ready', function() nuiReady = true end)
 
+    -- wait for the NUI to load
     while not nuiReady do Citizen.Wait(1) end
 
     while true do
         if #messageQueue > 0 and shouldSend() then
-            sendBulkMessages(messageQueue)
+            for _, m in ipairs(messageQueue) do
+                SendNUIMessage(m)
+            end
             messageQueue = {}
         end
         Citizen.Wait(0)
