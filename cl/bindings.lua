@@ -47,7 +47,8 @@ function Bindings.sendAction(action)
 end
 -- sends to the UI that the lua client is ready
 function Bindings.sendReady()
-    postNUI({type = 'ready'})
+    -- this must be sent immediately since the thread below relies on it
+    SendNUIMessage({type = 'ready'})
 end
 
 local function shouldSend()
@@ -59,7 +60,7 @@ Citizen.CreateThread(function()
     Events.addHandler(Events.global, 'ready', function() nuiReady = true end)
 
     -- wait for the NUI to load
-    while not nuiReady do Citizen.Wait(1) end
+    while not nuiReady do Citizen.Wait(0) end
 
     while true do
         if #messageQueue > 0 and shouldSend() then
