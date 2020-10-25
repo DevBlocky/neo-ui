@@ -42,19 +42,19 @@ Citizen.CreateThread(function() Bindings.sendReady() end)
 --[[ HANDLES EVENTS COMING FROM THE JS CLIENT ]]
 
 -- event schema
--- [js_ev_name] = {name = client_name, params = params_to_pass_in_order}
+-- [js_ev_name] = {name = global_ev_name, params = params_to_pass_in_order}
 local events = {
     ['ready'] = {name = "ready", params = {}},
-    ['open'] = {name = "menuOpen", params = {"menu"}},
-    ['close'] = {name = "menuClose", params = {"menu"}},
-    ['select'] = {name = "buttonSelect", params = {"menu", "button"}},
-    ['move'] = {name = "buttonHover", params = {"menu", "button", "index"}},
+    ['open'] = {name = "menuopen", params = {"menu"}},
+    ['close'] = {name = "menuclose", params = {"menu"}},
+    ['select'] = {name = "buttonselect", params = {"menu", "button"}},
+    ['move'] = {name = "buttonhover", params = {"menu", "button", "index"}},
     ['check_update'] = {
-        name = "buttonCheck",
+        name = "buttoncheck",
         params = {"menu", "button", "checked"}
     },
     ['list_move'] = {
-        name = "buttonListMove",
+        name = "buttonlistmove",
         params = {"menu", "button", "index"}
     }
 }

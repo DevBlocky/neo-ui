@@ -27,47 +27,47 @@ end
 
 -- functional events used as global event handlers
 local smEventHandlers = {
-    ['menuOpen'] = function(sm, menu)
+    ['menuopen'] = function(sm, menu)
         if not checkSmContains(sm, menu) then return end
-        Events.emit(sm.events, 'menuOpen', menu)
+        Events.emit(sm.events, 'menuclose', menu)
     end,
-    ['menuClose'] = function(sm, menu)
+    ['menuclose'] = function(sm, menu)
         if not checkSmContains(sm, menu) then return end
-        Events.emit(sm.events, 'menuClose', menu)
+        Events.emit(sm.events, 'menuclose', menu)
     end,
     ['action'] = function(sm, action)
         if action ~= 'back' then return end
         SM.openPreviousMenu(sm)
     end,
-    ['buttonSelect'] = function(sm, menu, button)
+    ['buttonselect'] = function(sm, menu, button)
         if not checkSmContains(sm, menu, button) then return end
 
-        Events.emit(sm.events, 'buttonSelect', menu, button)
+        Events.emit(sm.events, 'buttonselect', menu, button)
 
         -- handle binded buttons to menus
         local bindedMenu = sm.binds[button]
         if bindedMenu == nil then return end
         SM.openMenu(sm, bindedMenu, 'push')
     end,
-    ['buttonHover'] = function(sm, menu, button, index)
+    ['buttonhover'] = function(sm, menu, button, index)
         if not checkSmContains(sm, menu, button) then return end
         index = index + 1 -- coming from js, so convert to lua standard
 
         -- TODO: implement a "last button" parameter using cache
         local lastButton = SM.getMenuCurrentButton(sm, menu)
         sm.cache.menuIndices[menu] = index
-        Events.emit(sm.events, 'buttonHover', menu, button, lastButton, index)
+        Events.emit(sm.events, 'buttonhover', menu, button, lastButton, index)
     end,
-    ['buttonCheck'] = function(sm, menu, button, checked)
+    ['buttoncheck'] = function(sm, menu, button, checked)
         if not checkSmContains(sm, menu, button) then return end
         sm.cache.checks[button] = checked
-        Events.emit(sm.events, 'buttonCheck', menu, button, checked)
+        Events.emit(sm.events, 'buttoncheck', menu, button, checked)
     end,
-    ['buttonListMove'] = function(sm, menu, button, index)
+    ['buttonlistmove'] = function(sm, menu, button, index)
         if not checkSmContains(sm, menu, button) then return end
         index = index + 1 -- coming from js, so convert to lua standard
         sm.cache.listIndices[button] = index
-        Events.emit(sm.events, 'buttonListMove', menu, button, index)
+        Events.emit(sm.events, 'buttonlistmove', menu, button, index)
     end
 }
 
