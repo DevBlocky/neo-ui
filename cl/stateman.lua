@@ -105,9 +105,6 @@ function SM.init()
 end
 function SM.destroy(sm)
     sm = assertState(sm)
-    Citizen.Wait(0)
-    local state = GetResourceState(GetCurrentResourceName())
-    print(state)
 
     -- remove all regstered events
     for evName, fn in pairs(sm._gEv) do
