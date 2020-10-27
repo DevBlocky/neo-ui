@@ -27,5 +27,5 @@ end
 -- this will throw an error if a table does not include a key
 function assertContainsKey(tbl, key, errMsg)
     if tbl[key] then return tbl[key] end
-    error('assert failure: ' .. (errMsg or 'table does not contain value'))
+    error('assert failure: ' .. (errMsg or 'table does not contain key'))
 end
