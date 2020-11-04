@@ -59,7 +59,7 @@ b {
     display: flex;
     padding: 0.8vh 0.7vw;
 
-    background: rgba(0, 0, 0, 0.95);
+    background: rgb(0, 0, 0);
     color: rgb(34, 115, 221);
     text-transform: uppercase;
 }
@@ -72,7 +72,7 @@ b {
     border-top: 5px solid black;
     padding: 0.8vh 0.7vw;
 
-    background: rgba(0, 0, 0, 0.65);
+    background: rgba(0, 0, 0, 0.75);
     word-wrap: break-word;
 }
 
@@ -81,14 +81,14 @@ b {
     display: flex;
     padding: 0.8vh 0.7vw;
 
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.75);
     white-space: nowrap;
 }
 .btn > * {
     height: 100%;
 }
 .btn.selected {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.97);
     color: black;
 }
 .btn > .text {
