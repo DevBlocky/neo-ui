@@ -20,7 +20,6 @@ function safeTextWithTemplate(texts, template) {
     // go through the texts, escape the text and insert into template
     texts.forEach((text, i) => {
         const escapedText = DOMPurify.sanitize(text);
-        console.log(escapedText);
         template = template.replace(`{${i}}`, escapedText);
     });
     return template;
