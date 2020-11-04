@@ -29,7 +29,7 @@ end
 local smEventHandlers = {
     ['menuopen'] = function(sm, menu)
         if not checkSmContains(sm, menu) then return end
-        Events.emit(sm.events, 'menuclose', menu)
+        Events.emit(sm.events, 'menuopen', menu)
     end,
     ['menuclose'] = function(sm, menu)
         if not checkSmContains(sm, menu) then return end
