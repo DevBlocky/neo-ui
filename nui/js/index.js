@@ -17,14 +17,10 @@ async function postClient(payload, route = 'message') {
 function safeTextWithTemplate(texts, template) {
     if (!(texts instanceof Array)) texts = [texts];
 
+    // go through the texts, escape the text and insert into template
     texts.forEach((text, i) => {
-        const escapedText = text
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
-
+        const escapedText = DOMPurify.sanitize(text);
+        console.log(escapedText);
         template = template.replace(`{${i}}`, escapedText);
     });
     return template;
