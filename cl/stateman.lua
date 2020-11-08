@@ -53,7 +53,6 @@ local smEventHandlers = {
         if not checkSmContains(sm, menu, button) then return end
         index = index + 1 -- coming from js, so convert to lua standard
 
-        -- TODO: implement a "last button" parameter using cache
         local lastButton = SM.getMenuCurrentButton(sm, menu)
         sm.cache.menuIndices[menu] = index
         Events.emit(sm.events, 'buttonhover', menu, button, lastButton, index)
