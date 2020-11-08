@@ -100,8 +100,6 @@ b {
 /* Adjustments for the chevrons */
 .btn i.fas.arr {
     font-size: 80%;
-}
-.btn .chevron .arr {
     margin: 0 -0.1vw;
 }
 
