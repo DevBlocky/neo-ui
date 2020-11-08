@@ -1,12 +1,14 @@
 # Neopolitan UI
 
-A simple NUI based functional UI for FiveM. Using Lua's fast runtime, NUI & Vue.js, it has optimal performance over
-other competitors' native-based menus while being more customizable.
+Neopolitan UI is a simple UI backend for FiveM taking advantage of NUI and Vue.js. It uses
+these features to its advantage by having faster performance timings when compared to competitors
+(like NativeUI). It achieves this while also holding customizability.
 
 ## WIP
 
-This project is a Work-In-Progress. Documentation is very uncomplete, and there are most likely bugs that need to be
-weeded out. If you're reading this, use this at your own risk.
+This UI backend is a Work-In-Progress project. Although documentation is being worked on, it might not be up-to-date
+or complete in the fullest, and there are likely bugs or missing features that need to be hammered out. There are also
+possibilities of dramatic changes that would be breaking until 1.0.0 is officially released.
 
 ## Features
 
@@ -20,13 +22,16 @@ weeded out. If you're reading this, use this at your own risk.
 ## Performance Optimized
 
 This UI backend uses NUI & Vue.js instead of native-based drawing to optimize performance while rendering menus.
+Levereging NUI & Vue.js increases performance by a large margin when compared to competitors (like NativeUI).
+[//]: # (TODO: include a picture showcasing the differences in speed.)
 
 ## Getting Started
 
-If you are not a software developer, then you can simply download this script and load it into your FiveM server.
+If you are not a software developer, then you can simply download this script and load it into your FiveM server under the name `neo-ui`.
 
 If you are, to get started using our menu backend for your script, head over to the
-[Github Wiki](https://github.com/blockba5her/neo-ui/wiki).
+[Github Wiki](https://github.com/blockba5her/neo-ui/wiki) to start learning, or see our
+[examples](https://github.com/blockba5her/neo-ui/tree/main/examples).
 
 ## Contributing / Issues
 
@@ -35,5 +40,5 @@ If you are, to get started using our menu backend for your script, head over to 
 
 ## License
 
-This repository is licensed under the MIT license. For more information, head over to
+This repository is licensed under the MIT license. For more information, head over to the
 [LICENSE](https://github.com/blockba5her/neo-ui/blob/master/LICENSE).

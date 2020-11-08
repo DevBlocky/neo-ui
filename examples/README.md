@@ -1,12 +1,13 @@
 # Neopolitan UI Examples
 
-This folder contains exammples of how to use the `neo-ui` API. If you learn by example, this is probably the best for you.
-If you want to read the documentation, you can head over to [the wiki](https://github.com/blockba5her/neo-ui/wiki).
+Here is where you can find hands-on examples of how to use the `neo-ui` backend UI API. If you best learn by example,
+then this is probably the best for you. If you want to see the API Reference, Getting Started, or other guides please
+see the [GitHub Wiki](https://github.com/blockba5her/neo-ui/wiki).
 
 ## Warning
 
-These menus are here as examples for developers willing to try out Neopolitan UI. If you are not a developer, don't use
-any of these! Period!!!
+These examples are just that, *examples*. Do not use these as actual menus since they contain no value whatsoever.
+If you are still not convinced, well I guess I can't stop you. But it's still a horrible idea.
 
 ## Examples
 
