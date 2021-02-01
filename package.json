@@ -12,6 +12,6 @@
     },
     "homepage": "https://github.com/blockba5her/neo-ui#readme",
     "devDependencies": {
-        "eslint": "^7.18.0"
+        "eslint": "^7.19.0"
     }
 }
